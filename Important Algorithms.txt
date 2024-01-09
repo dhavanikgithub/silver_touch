@@ -1,0 +1,190 @@
+////Bubble sort Algo////
+babblesort(arr,n)
+{
+    for(i=0 to n) do
+        f=0;
+        for(j=0 to n-i) do
+            if(arr[j]>arr[j+1]) then
+                f=1;
+                swap arr[j] and arr[j+1]
+        done
+        if(f==0) then
+            break;
+    done
+}
+
+////Selection Sort Algo////
+selectionsort(arr,n)
+{
+    for(i=0 to n) do
+        min=i;
+        for(j=i+1 to n) do
+            if(arr[min]>arr[j]) then
+                min=j;
+        done
+        if(min!=i) then
+            swap arr[min] and arr[i]
+    done
+}
+
+
+////Insertion Sort Algo////
+insertionsort(arr,n)
+{
+    for(j=1 to n) do
+        temp=arr[j];
+        i=j-1;
+        while(i>=0 && temp<arr[i]) do
+            arr[i+1]=arr[i];
+            i--;
+        done
+        arr[i+1]=temp;
+    done
+}
+
+
+////Quick Sort Algo////
+partation(arr,lb,ub)
+{
+    pivot=lb; //select lower bound as pivot element
+    start=lb,end=ub;
+    while(start<end) do
+        while(arr[start]<=arr[pivot]) do
+            start++;
+        done
+        while(arr[end]>arr[pivot]) do
+            end--;
+        done
+        if(start<end) then
+           swap arr[start] and arr[end]  
+    done
+    swap arr[end] and arr[pivot]
+    return end;
+}
+quicksort(arr,lb,ub)
+{
+    if(lb<ub) then
+        pos=partation(arr, lb, ub);
+        quicksort(arr,lb,pos-1);
+        quicksort(arr,pos+1,ub);
+}
+
+
+////Randomize Quick Sort////
+partation(arr,lb,ub)
+{
+    generate random index between lower bound to upper bound
+    then swap this index element to lower bound element
+    srand(time(0));
+    index=lb+rand()%(ub-lb);
+    t=arr[index];
+    arr[index]=arr[lb]
+    arr[lb]=t
+	
+    pivot=lb; //select lower bound as pivot element
+    start=lb,end=ub;
+    while(start<end) do
+        while(arr[start]<=arr[pivot]) do
+            start++;
+        done
+        while(arr[end]>arr[pivot]) do
+            end--;
+        done
+        if(start<end) then
+           swap arr[start] and arr[end]  
+    done
+    swap arr[end] and arr[pivot]
+    return end;
+}
+quicksort(arr,lb,ub)
+{
+    if(lb<ub) then
+        pos=partation(arr, lb, ub);
+        quicksort(arr,lb,pos-1);
+        quicksort(arr,pos+1,ub);
+}
+
+
+
+////Merge Sort Algo////
+mergesort(arr,lb,ub)
+{
+    if(lb<ub) then
+        mid=(lb+ub)/2;
+        mergesort(arr, lb, mid);
+        mergesort(arr, mid+1, ub);
+        merge(arr, lb, mid, ub);
+}
+void merge(arr,lb,mid,ub)
+{
+    i=lb, j=mid+1, b[ub], k=lb;
+    while(i<=mid && j<=ub) do
+        if(arr[i]<arr[j]) then
+            b[k]=arr[i];
+            increase k and i by 1
+        else then
+            b[k]=arr[j];
+            increase k and j by 1
+    done
+    if(i>mid) then
+        while(j<=ub) do
+            b[k]=arr[j];
+            increase k and j by 1
+        done
+    if(j>ub) then
+        while(i<=mid) do
+            b[k]=arr[i];
+            increase k and i by 1
+        done
+    for(m=lb to ub) do
+        arr[m]=b[m];
+    done
+}
+
+
+////Counting Inverse Using Divide and Concur Algo////
+mergesort(arr,lb,ub)
+{
+    if(lb<ub) then
+        mid=(lb+ub)/2;
+        mergesort(arr, lb, mid);
+        mergesort(arr, mid+1, ub);
+        merge(arr, lb, mid, ub);
+}
+void merge(arr,lb,mid,ub)
+{
+    i=lb, j=mid+1, b[ub], k=lb;
+    while(i<=mid && j<=ub) do
+        if(arr[i]<arr[j]) then
+            b[k]=arr[i];
+            increase k and i by 1
+            //Count the number of counting inverse is there
+            counter+=mid-i+1;
+        else then
+            b[k]=arr[j];
+            increase k and j by 1
+    done
+    if(i>mid) then
+        while(j<=ub) do
+            b[k]=arr[j];
+            increase k and j by 1
+        done
+    if(j>ub) then
+        while(i<=mid) do
+            b[k]=arr[i];
+            increase k and i by 1
+        done
+    for(m=lb to ub) do
+        arr[m]=b[m];
+    done
+}
+
+
+//// Counting Inverse Algo using loop ////
+for(i=0 to n) do
+    for(j=i+1 to n) do
+        if(arr[i]>arr[j] && i < j) then
+            //Count the number of counting inverse is there
+            count++;
+    done
+done

@@ -1,0 +1,69 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+int partation(int *arr, int lb, int ub)
+{
+    srand(time(0)); 
+    int index=lb + rand() % (ub - lb);
+    int temp2=arr[index];
+    arr[index]=arr[lb];
+    arr[lb]=temp2;
+    
+    int pivot=lb;
+    int start=lb,end=ub;
+    while(start<end)
+    {
+        while(arr[start]<=arr[pivot])
+        {
+            start++;
+        }
+        while(arr[end]>arr[pivot])
+        {
+            end--;
+        }
+        if(start<end)
+        {
+            int temp=arr[start];
+            arr[start]=arr[end];
+            arr[end]=temp;
+        }
+    }
+    int temp=arr[end];
+    arr[end]=arr[pivot];
+    arr[pivot]=temp;
+    return end;
+    
+}
+void quicksort(int *arr, int lb, int ub)
+{
+    if(lb<ub)
+    {
+        int pos=partation(arr, lb, ub);
+        quicksort(arr,lb,pos-1);
+        quicksort(arr,pos+1,ub);
+    }
+}
+void display(int *arr, int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+    printf("\n");
+}
+int main()
+{
+    int n,*arr;
+    printf("Enter Array size: ");
+    scanf("%d",&n);
+    arr=(int *)malloc(n*sizeof(int));
+    srand((unsigned) time(0));
+    for(int i=0;i<n;i++)
+    {
+        arr[i]=rand()%1000;
+    }
+    display(arr,n);
+    quicksort(arr,0,n-1);
+    display(arr,n);
+    return 0;
+}

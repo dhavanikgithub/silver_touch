@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+void insertionsort(int *arr, int n)
+{
+    for(int j=1;j<n;j++)
+    {
+        int temp=arr[j];
+        int i=j-1;
+        while(i>=0 && temp<arr[i])
+        {
+            arr[i+1]=arr[i];
+            i--;
+        }
+        arr[i+1]=temp;
+    }
+}
+void display(int *arr, int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        printf("%d ",arr[i]);
+    }
+    printf("\n");
+}
+void main()
+{
+    int n,*arr;
+    srand((unsigned) time(0));
+    printf("Enter Array Size: ");
+    scanf("%d",&n);
+    arr=(int *)malloc(n*sizeof(int));
+    for(int i=0;i<n;i++)
+    {
+        arr[i]=rand()%1000;
+    }
+    display(arr,n);
+    insertionsort(arr, n);
+    display(arr,n);
+}
